@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Management Dashboard | Sneha Sharma</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app" id="app">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <h1>Project Dashboard</h1>
+                <span class="project-count" id="project-count">0 tasks</span>
+            </div>
+            <div class="header-actions">
+                <div class="search-container">
+                    <input type="text" id="search-input" placeholder="Search tasks...">
+                    <span class="search-icon">🔍</span>
+                </div>
+                <button id="notification-btn" class="notification-btn">🔔</button>
+                <button id="dark-toggle" class="dark-toggle" title="Toggle Dark Mode">🌙</button>
+                <button id="export-btn" class="export-btn">📤</button>
+            </div>
+        </header>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h3>Filters</h3>
+            </div>
+            <nav class="filter-nav">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="today">Today</button>
+                <button class="filter-btn" data-filter="overdue">Overdue</button>
+                <button class="filter-btn" data-filter="high">High Priority</button>
+            </nav>
+        </aside>
+
+        <!-- Main Boards -->
+        <main class="main-content">
+            <div class="progress-section">
+                <canvas id="progress-chart" width="100" height="100"></canvas>
+                <div class="progress-info">
+                    <div id="progress-text">0%</div>
+                    <div>Completed</div>
+                </div>
+            </div>
+            
+            <div class="boards-container">
+                <section class="board" data-status="todo">
+                    <div class="board-header">
+                        <h2>To Do <span class="count" id="todo-count">0</span></h2>
+                        <button class="add-task-btn" data-status="todo">+ Add Task</button>
+                    </div>
+                    <div class="tasks-dropzone" data-dropzone="todo"></div>
+                </section>
+
+                <section class="board" data-status="in-progress">
+                    <div class="board-header">
+                        <h2>In Progress <span class="count" id="in-progress-count">0</span></h2>
+                        <button class="add-task-btn" data-status="in-progress">+ Add Task</button>
+                    </div>
+                    <div class="tasks-dropzone" data-dropzone="in-progress"></div>
+                </section>
+
+                <section class="board" data-status="done">
+                    <div class="board-header">
+                        <h2>Done <span class="count" id="done-count">0</span></h2>
+                        <button class="add-task-btn" data-status="done">+ Add Task</button>
+                    </div>
+                    <div class="tasks-dropzone" data-dropzone="done"></div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Task Modal -->
+        <dialog id="task-modal" class="task-modal">
+            <div class="modal-header">
+                <h3 id="modal-title">Add New Task</h3>
+                <button class="close-modal" id="close-modal">&times;</button>
+            </div>
+            <form id="task-form">
+                <input type="text" name="title" placeholder="Task title" required maxlength="100">
+                <textarea name="description" placeholder="Description" maxlength="500"></textarea>
+                <div class="form-row">
+                    <select name="priority" required>
+                        <option value="">Select Priority</option>
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                    <input type="date" name="dueDate">
+                </div>
+                <div class="form-actions">
+                    <button type="button" id="delete-task-btn" style="display: none;">Delete Task</button>
+                    <button type="button" class="cancel-btn">Cancel</button>
+                    <button type="submit">Save Task</button>
+                </div>
+            </form>
+        </dialog>
+
+        <!-- Notification -->
+        <div id="notification" class="notification hidden">
+            <span id="notification-text"></span>
+            <button class="close-notification">&times;</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
